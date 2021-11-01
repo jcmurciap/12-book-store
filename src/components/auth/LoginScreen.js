@@ -23,8 +23,6 @@ const Div = styled('div')(({ theme }) => ({
     },
     maxWidth: "400px",
     marginTop: theme.spacing(5),
-
-        
 }));
 
 export const LoginScreen = () => {
