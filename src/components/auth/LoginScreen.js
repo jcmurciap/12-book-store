@@ -14,7 +14,7 @@ import { styled } from '@mui/material/styles';
 //import Box from '@mui/material/Box';
 //import { StyledEngineProvider } from '@mui/material/styles';
 
-const Div = styled('div')(({ theme }) => ({
+export const Div = styled('div')(({ theme }) => ({
     [theme.breakpoints.up('sm')]: {
         boxShadow: theme.shadows[3],
         padding: theme.spacing(2),
