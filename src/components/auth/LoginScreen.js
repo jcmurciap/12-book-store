@@ -47,11 +47,19 @@ export const LoginScreen = () => {
                     <Grid item xs={12}>
                         <TextField fullWidth required id="outlined-password-input" label="Password" type="password"/>
                     </Grid>
-                    <Grid item xs={12}><Button variant="text" sx={{ textTransform: "capitalize" }}>Forgot password?</Button></Grid>
-                    <Grid item xs={12}><Button fullWidth variant="contained">Continue</Button></Grid>
+                    <Grid item xs={12}><Button variant="text" sx={{ textTransform: "capitalize", color: "DarkOliveGreen" }}>Forgot password?</Button></Grid>
+                    <Grid item xs={12}>
+                        <Button fullWidth variant="contained" sx={{ backgroundColor: "DarkOliveGreen" }}>
+                            Continue
+                        </Button>
+                    </Grid>
                 </Grid>
                 <Grid container rowSpacing={1} sx={{ marginTop: 2  }}>
-                    <Grid item xs={12}><Button fullWidth variant="outlined">Create account</Button></Grid>
+                    <Grid item xs={12}>
+                        <Button fullWidth variant="outlined" sx={{ color: "DarkOliveGreen" }}>
+                            Create account
+                        </Button>
+                    </Grid>
                     <Grid item xs={12}><Divider>Or register with</Divider></Grid>
                     <Grid item xs={12}>
                         <Stack direction="row" spacing={2} sx={{ display: "flex", justifyContent: "center" }}>
