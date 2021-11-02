@@ -1,7 +1,6 @@
 import React from 'react'
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -41,7 +40,7 @@ export const NavBar = () => {
     
     return (
         <>
-            <AppBar sx={{ backgroundColor: "DarkOliveGreen" }}>   
+            <AppBar sx={{ backgroundColor: "DarkGreen" }}>   
                 <Toolbar sx={{justifyContent: "space-between"}}>
                     <IconButton>
                         <Avatar 
@@ -51,11 +50,18 @@ export const NavBar = () => {
                         />
                     </IconButton>
                     <Stack direction="row"sx={{ display: { xs: "none", md: "flex" }}}>
-                        <ButtonGroup variant="none">
-                            <Button color="inherit">Checkouts</Button>
-                            <Button color="inherit">Users</Button>
+                        <ButtonGroup variant="none" sx={{ marginRight: 10}}>
+                            <Button color="inherit" sx={{ textTransform: "capitalize" }}>Checkouts</Button>
+                            <Button color="inherit" sx={{ textTransform: "capitalize" }}>Users</Button>
                         </ButtonGroup>
-                        <Button variant="outlined" color="error">Logout</Button>
+                        <Button 
+                            sx={{backgroundColor: "white", textTransform: "capitalize"}}
+                            startIcon={<LogoutOutlinedIcon />} 
+                            variant="outlined" 
+                            color="error"
+                        >
+                            Logout
+                        </Button>
                     </Stack>
                     <Stack sx={{ display: {xs:"flex", md:"none"} }}>
                         <IconButton>
