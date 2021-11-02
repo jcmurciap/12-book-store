@@ -1,9 +1,10 @@
 import React from 'react'
+import { NavBar } from '../ui/NavBar';
 
 export const BookStoreScreen = () => {
     return (
         <div>
-            <h1>BookStoreScreen</h1>
+            <NavBar />
         </div>
     );
 };
