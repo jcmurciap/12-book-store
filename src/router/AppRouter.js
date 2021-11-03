@@ -5,10 +5,10 @@ import {
     Route,
     Redirect
   } from "react-router-dom";
+import { BookStoreScreen } from '../components/bookStore/BookStoreScreen';
+import { UserScreen } from '../components/ui/UserScreen';
 import { LoginScreen } from '../pages/auth/LoginScreen';
 import { SignoutScreen } from '../pages/auth/SignoutScreen';
-import { BookStoreScreen } from '../components/bookStore/BookStoreScreen';
-import { UserScreen } from '../components/bookStore/UserScreen';
 
 export const AppRouter = () => {
     return (
@@ -39,5 +39,5 @@ export const AppRouter = () => {
                 </Switch>
             </div>
         </Router>
-    )
-}
+    );
+};

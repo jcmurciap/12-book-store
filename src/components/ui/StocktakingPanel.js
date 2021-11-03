@@ -31,6 +31,15 @@ export const ButtonBase = styled(Button)({
 });
 
 export const StocktakingPanel = () => {
+
+    const onDoubleClick = () => {
+        console.log('onDoubleClick'); // Must to call open-Modal
+    };
+
+    const onClick = () => {
+        console.log('onClick');
+    };
+
     return (
         <>  
             <Container sx={{ marginTop: 10 }}>
@@ -41,6 +50,9 @@ export const StocktakingPanel = () => {
                     rows={rows}
                     columns={columns}
                     hideFooterPagination
+                    onRowDoubleClick={onDoubleClick}
+                    onRowClick={onClick}
+                    hideFooterSelectedRowCount
                 />
             </Container>
         </>
