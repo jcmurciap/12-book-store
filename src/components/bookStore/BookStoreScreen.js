@@ -1,9 +1,12 @@
 import React from 'react'
+import { NavBar } from '../ui/NavBar';
+import { StocktakingPanel } from '../ui/StocktakingPanel';
 
 export const BookStoreScreen = () => {
     return (
         <div>
-            <h1>BookStoreScreen</h1>
+            <NavBar />
+            <StocktakingPanel />
         </div>
     );
 };

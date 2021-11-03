@@ -11,6 +11,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
+import { ButtonBase } from '../../components/ui/StocktakingPanel';
 //import Box from '@mui/material/Box';
 //import { StyledEngineProvider } from '@mui/material/styles';
 
@@ -47,11 +48,19 @@ export const LoginScreen = () => {
                     <Grid item xs={12}>
                         <TextField fullWidth required id="outlined-password-input" label="Password" type="password"/>
                     </Grid>
-                    <Grid item xs={12}><Button variant="text" sx={{ textTransform: "capitalize" }}>Forgot password?</Button></Grid>
-                    <Grid item xs={12}><Button fullWidth variant="contained">Continue</Button></Grid>
+                    <Grid item xs={12}><Button variant="text" sx={{ textTransform: "capitalize", color: "DarkGreen" }}>Forgot password?</Button></Grid>
+                    <Grid item xs={12}>
+                        <Button fullWidth variant="contained" sx={{ backgroundColor: "DarkGreen" }}>
+                            Continue
+                        </Button>
+                    </Grid>
                 </Grid>
                 <Grid container rowSpacing={1} sx={{ marginTop: 2  }}>
-                    <Grid item xs={12}><Button fullWidth variant="outlined">Create account</Button></Grid>
+                    <Grid item xs={12}>
+                        <ButtonBase fullWidth variant="outlined">
+                            Create account
+                        </ButtonBase>
+                    </Grid>
                     <Grid item xs={12}><Divider>Or register with</Divider></Grid>
                     <Grid item xs={12}>
                         <Stack direction="row" spacing={2} sx={{ display: "flex", justifyContent: "center" }}>

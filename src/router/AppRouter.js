@@ -5,8 +5,10 @@ import {
     Route,
     Redirect
   } from "react-router-dom";
-import { LoginScreen } from '../components/auth/LoginScreen';
+import { LoginScreen } from '../pages/auth/LoginScreen';
+import { SignoutScreen } from '../pages/auth/SignoutScreen';
 import { BookStoreScreen } from '../components/bookStore/BookStoreScreen';
+import { UserScreen } from '../components/bookStore/UserScreen';
 
 export const AppRouter = () => {
     return (
@@ -19,8 +21,19 @@ export const AppRouter = () => {
                         path="/login"
                     />
                     <Route
+                        component={SignoutScreen}
+                        exact
+                        path="/register"
+                    />
+                    <Route
                         component={BookStoreScreen}
+                        exact
                         path="/"
+                    />
+                    <Route
+                        component={UserScreen}
+                        exact
+                        path="/user"
                     />
                     <Redirect to="/"/>
                 </Switch>
