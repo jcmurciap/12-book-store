@@ -5,7 +5,8 @@ import {
     Route,
     Redirect
   } from "react-router-dom";
-import { LoginScreen } from '../components/auth/LoginScreen';
+import { LoginScreen } from '../pages/auth/LoginScreen';
+import { SignoutScreen } from '../pages/auth/SignoutScreen';
 import { BookStoreScreen } from '../components/bookStore/BookStoreScreen';
 
 export const AppRouter = () => {
@@ -17,6 +18,11 @@ export const AppRouter = () => {
                         component={LoginScreen}
                         exact
                         path="/login"
+                    />
+                    <Route
+                        component={SignoutScreen}
+                        exact
+                        path="/register"
                     />
                     <Route
                         component={BookStoreScreen}
