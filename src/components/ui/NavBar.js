@@ -12,6 +12,7 @@ import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import ButtonGroup from '@mui/material/ButtonGroup';
+import { StocktakingPanel } from './StocktakingPanel';
 
 export const NavBar = () => {
     
@@ -71,6 +72,7 @@ export const NavBar = () => {
                 </Toolbar>
             </AppBar>
             {renderMenuMobile}
+            {StocktakingPanel}
         </>
     );
 };
