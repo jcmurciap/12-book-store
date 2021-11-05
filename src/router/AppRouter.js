@@ -7,8 +7,8 @@ import {
   } from "react-router-dom";
 import { BookStoreScreen } from '../components/bookStore/BookStoreScreen';
 import { UserScreen } from '../components/ui/UserScreen';
-import { LoginScreen } from '../pages/auth/LoginScreen';
-import { SignoutScreen } from '../pages/auth/SignoutScreen';
+import { LoginScreen } from '../components/auth/LoginScreen';
+import { SignoutScreen } from '../components/auth/SignoutScreen';
 
 export const AppRouter = () => {
     return (
