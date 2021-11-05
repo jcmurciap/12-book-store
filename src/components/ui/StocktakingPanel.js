@@ -5,6 +5,8 @@ import Button from '@mui/material/Button';
 import { DataGrid } from '@mui/x-data-grid';
 import Container from '@mui/material/Container';
 import CreateIcon from '@mui/icons-material/Create';
+import { useDispatch } from 'react-redux';
+import { uiOpenModal } from '../../actions/ui';
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -32,27 +34,30 @@ export const ButtonBase = styled(Button)({
 
 export const StocktakingPanel = () => {
 
-    const onDoubleClick = () => {
-        console.log('onDoubleClick'); // Must to call open-Modal
-    };
-
-    const onClick = () => {
-        console.log('onClick');
-    };
-
+    const dispatch = useDispatch();
+    const handleOpenModal = (event) => {
+        dispatch(uiOpenModal());
+    }
+    
     return (
         <>  
             <Container sx={{ marginTop: 10 }}>
                 <Box sx={{ marginBottom: 1 }}>
-                    <ButtonBase variant="outlined" startIcon={<CreateIcon />}>Add Book</ButtonBase>
+                    <ButtonBase 
+                        startIcon={<CreateIcon />}
+                        variant="outlined"
+                        onClick={handleOpenModal} 
+                    >
+                        Add Book
+                    </ButtonBase>
                 </Box>
                 <DataGrid
                     rows={rows}
                     columns={columns}
                     hideFooterPagination
-                    onRowDoubleClick={onDoubleClick}
-                    onRowClick={onClick}
+                    //onRowClick={onClick} // to delete a row
                     hideFooterSelectedRowCount
+                    autoHeight
                 />
             </Container>
         </>
