@@ -6,13 +6,17 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Grid } from '@mui/material';
 import Paper from '@mui/material/Paper';
+import Fab from '@mui/material/Fab';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import { useDispatch, useSelector } from 'react-redux';
+import { uiCloseModal } from '../../actions/ui';
 
 const style = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
+    width: 350,
     bgcolor: "background.paper",
     padding: 4,
     boxShadow: 10,
@@ -26,69 +30,48 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export const BookStoreModal = () => {
+
+    const dispatch = useDispatch();
+    
+    const { modalOpen } = useSelector(state => state.ui);
+    const closeModal = (event) => {
+        event.preventDefault();
+        dispatch(uiCloseModal());
+    };
+
+    let names,genre,author,language,year,ilustrator,isbn,price;
+    
+    const handleClick = () => {
+        console.log('something');
+    };
+    const handleChange = (event) => {
+        console.log(event.target.value);
+    };   
+
     return (
-            <Modal>
+            <Modal open={modalOpen}>
                 <Box sx={style}>
-                    <Grid container spacing={2}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={4}><Item variant="none">Name:</Item></Grid>
-                            <Grid item xs={8}>
-                                <TextField id="standard-basic" value='La metamorfosis' variant="standard" />
-                            </Grid>
+                    <Fab 
+                        aria-label="close" 
+                        color="Red"
+                        onClick={closeModal} 
+                        size="small" 
+                        sx={{ position: "absolute", marginLeft: 40, marginTop: -2 }}
+                    >
+                        <CloseOutlinedIcon />
+                    </Fab>
+                    <Grid container spacing={0.4}>
+                        <Grid item xs={12}>
+                            <TextField fullWidth id="standard-basic" label="Name" variant="standard" value={names} onChange={handleChange} size="small"/>
                         </Grid>
-                        <Grid container spacing={2}>
-                            <Grid item xs={4}><Item variant="none">Genre</Item></Grid>
-                            <Grid item xs={8}>
-                                <TextField id="standard-basic" value="Terror"variant="standard" />
-                            </Grid>
+                        <Grid item xs={12}>
+                            <TextField fullWidth id="standard-basic" label="Author" variant="standard" value={author} onChange={handleChange} size="small"/>
                         </Grid>
-                        <Grid container spacing={2}>
-                            <Grid item xs={4}><Item variant="none">Author</Item></Grid>
-                            <Grid item xs={8}>
-                                <TextField id="standard-basic" value="Franks Kafka"variant="standard"/>
-                            </Grid>
+                        <Grid item xs={12}>
+                            <TextField fullWidth id="standard-basic" label="Price" variant="standard" value={price} onChange={handleChange} size="small"/>
                         </Grid>
-                        <Grid container spacing={2}>
-                            <Grid item xs={4}><Item variant="none">Language</Item></Grid>
-                            <Grid item xs={8}>
-                                <TextField id="standard-basic" value="Spanish"variant="standard"/>
-                            </Grid>
-                        </Grid>
-                        <Grid container spacing={2}>
-                            <Grid item xs={4}><Item variant="none">Format</Item></Grid>
-                            <Grid item xs={8}>
-                                <TextField id="standard-basic" value="PDF"variant="standard"/>
-                            </Grid>
-                        </Grid>
-                        <Grid container spacing={2}>
-                            <Grid item xs={4}><Item variant="none">Year</Item></Grid>
-                            <Grid item xs={8}>
-                                <TextField id="standard-basic" value="1993"variant="standard"/>
-                            </Grid>
-                        </Grid>
-                        <Grid container spacing={2}>
-                            <Grid item xs={4}><Item variant="none">Ilustrator</Item></Grid>
-                            <Grid item xs={8}>
-                                <TextField id="standard-basic" value="Planeta"variant="standard"/>
-                            </Grid>
-                        </Grid>
-                        <Grid container spacing={2}>
-                            <Grid item xs={4}><Item variant="none">ISBN</Item></Grid>
-                            <Grid item xs={8}>
-                                <TextField id="standard-basic" value="234567896"variant="standard" />
-                            </Grid>
-                        </Grid>
-                        <Grid container spacing={2}>
-                            <Grid item xs={4}><Item variant="none">Price</Item></Grid>
-                            <Grid item xs={8}>
-                                <TextField id="standard-basic" value="45.000"variant="standard" />
-                            </Grid>
-                        </Grid>
-                        <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-                            <Button
-                                color="success" 
-                                variant="contained"
-                            >
+                        <Grid item xs={12} sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}>
+                            <Button color="success" variant="contained" onClick={handleClick}>
                                 Apply changes
                             </Button>
                         </Grid>
