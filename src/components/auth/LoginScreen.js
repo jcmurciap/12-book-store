@@ -11,7 +11,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
-import { ButtonBase } from '../../components/ui/StocktakingPanel';
+import { ButtonBase } from '../ui/StocktakingPanel';
 //import Box from '@mui/material/Box';
 //import { StyledEngineProvider } from '@mui/material/styles';
 

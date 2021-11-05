@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -7,30 +7,39 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Stack from '@mui/material/Stack';
-import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import { StocktakingPanel } from './StocktakingPanel';
 
 export const NavBar = () => {
     
+    const [anchorEl, setAnchorEl] = useState(null);
+    const openMenuMob = Boolean(anchorEl);
+    const handleCloseMenuMob = () => {
+        setAnchorEl(null);    
+    };
+    const handleClickMob = (event) => {
+        setAnchorEl(event.currentTarget);
+    }; 
+
     const renderMenuMobile = (
-        <Menu>
-            <MenuItem>
-                <IconButton>
-                    <MenuBookOutlinedIcon />
-                </IconButton>
-                <p>Checkouts</p>
-            </MenuItem>
-            <MenuItem>
+        <Menu
+            anchorEl={anchorEl}
+            id="menu-mobile"
+            MenuListProps={{'aria-labelledby': 'button-menu-mobile'}}
+            onClose={handleCloseMenuMob}
+            open={openMenuMob}
+        >
+            <MenuItem 
+                onClick={(event) => {event.view.window.location.href="http://localhost:3000/user"}}
+            >  
                 <IconButton>
                     <PeopleAltOutlinedIcon />
                 </IconButton>
                 <p>Users</p>
             </MenuItem>
-            <MenuItem>
+            <MenuItem onClick={(event) => {event.view.window.location.href="http://localhost:3000/login"}}>
                 <IconButton>
                     <LogoutOutlinedIcon />
                 </IconButton>
@@ -43,7 +52,7 @@ export const NavBar = () => {
         <>
             <AppBar sx={{ backgroundColor: "DarkGreen" }}>   
                 <Toolbar sx={{justifyContent: "space-between"}}>
-                    <IconButton>
+                    <IconButton href="/">
                         <Avatar 
                             alt="logo-navbar"
                             src="https://editorialsentir.com/wp-content/uploads/2020/05/LOGO-CASA-LIBRO.png"
@@ -56,23 +65,28 @@ export const NavBar = () => {
                             <Button color="inherit" sx={{ textTransform: "capitalize" }}>Users</Button>
                         </ButtonGroup>
                         <Button 
-                            sx={{backgroundColor: "white", textTransform: "capitalize"}}
-                            startIcon={<LogoutOutlinedIcon />} 
-                            variant="outlined" 
                             color="error"
+                            startIcon={<LogoutOutlinedIcon />} 
+                            sx={{backgroundColor: "white", textTransform: "capitalize"}}
+                            variant="outlined" 
                         >
                             Logout
                         </Button>
                     </Stack>
                     <Stack sx={{ display: {xs:"flex", md:"none"} }}>
-                        <IconButton>
+                        <IconButton 
+                            aria-controls="menu-mobile"
+                            aria-expanded={openMenuMob ? true : undefined}
+                            aria-haspopup="true"
+                            id="button-menu-mobile"
+                            onClick={handleClickMob}
+                        >
                             <MenuOutlinedIcon />
                         </IconButton>
                     </Stack>
                 </Toolbar>
+                {renderMenuMobile}
             </AppBar>
-            {renderMenuMobile}
-            {StocktakingPanel}
         </>
     );
 };
