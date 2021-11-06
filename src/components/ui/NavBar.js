@@ -7,7 +7,6 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Stack from '@mui/material/Stack';
-import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import ButtonGroup from '@mui/material/ButtonGroup';
@@ -31,14 +30,7 @@ export const NavBar = () => {
             onClose={handleCloseMenuMob}
             open={openMenuMob}
         >
-            <MenuItem 
-                onClick={(event) => {event.view.window.location.href="http://localhost:3000/user"}}
-            >  
-                <IconButton>
-                    <PeopleAltOutlinedIcon />
-                </IconButton>
-                <p>Users</p>
-            </MenuItem>
+            
             <MenuItem onClick={(event) => {event.view.window.location.href="http://localhost:3000/login"}}>
                 <IconButton>
                     <LogoutOutlinedIcon />

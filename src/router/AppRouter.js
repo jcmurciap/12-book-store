@@ -6,7 +6,6 @@ import {
     Redirect
   } from "react-router-dom";
 import { BookStoreScreen } from '../components/bookStore/BookStoreScreen';
-import { UserScreen } from '../components/ui/UserScreen';
 import { LoginScreen } from '../components/auth/LoginScreen';
 import { SignoutScreen } from '../components/auth/SignoutScreen';
 
@@ -29,11 +28,6 @@ export const AppRouter = () => {
                         component={BookStoreScreen}
                         exact
                         path="/"
-                    />
-                    <Route
-                        component={UserScreen}
-                        exact
-                        path="/user"
                     />
                     <Redirect to="/"/>
                 </Switch>
