@@ -2,7 +2,7 @@
 import { types } from '../types/types'
 
 export const initState = {
-    events: [],
+    events: [{id: "1", name:"libro1" ,author:"author1", price: "10"}],
 };
 
 export const bookStoreReducer = (state=initState, action) => {

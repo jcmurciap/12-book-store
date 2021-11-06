@@ -26,11 +26,11 @@ export const ButtonBase = styled(Button)({
 export const BookStoreScreen = () => { 
     
     const dispatch = useDispatch();
-    const handleOpenModal = () => {
+    const onHandleOpenModal = () => {
         dispatch(uiOpenModal());
     };
     const { events } = useSelector( state => state.book );
-
+    
     return (
         <>
             <NavBar />
@@ -39,17 +39,18 @@ export const BookStoreScreen = () => {
                     <ButtonBase 
                         startIcon={<CreateIcon />}
                         variant="outlined"
-                        onClick={handleOpenModal} 
+                        onClick={onHandleOpenModal} 
                     >
                         Add Book
                     </ButtonBase>
                 </Box>
                 <DataGrid
-                    rows={events}
+                    autoHeight
                     columns={columns}
                     hideFooterPagination
                     hideFooterSelectedRowCount
-                    autoHeight
+                    onCellDoubleClick={onHandleOpenModal}
+                    rows={events}
                 />
             </Container>
             <BookStoreModal />
