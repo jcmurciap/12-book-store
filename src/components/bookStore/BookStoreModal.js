@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import Fab from '@mui/material/Fab';
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseModal } from '../../actions/ui';
-import { bookStoreAddBook } from '../../actions/bookStore';
+import { eventAddBook, eventUpdated } from '../../actions/bookStore';
 
 const style = {
     position: "absolute",
@@ -27,16 +25,24 @@ const initEvent = {id: "", name: "", author: "", price: ""};
 export const BookStoreModal = () => {
 
     const dispatch = useDispatch();
-    
-    const { modalOpen } = useSelector(state => state.ui);
-    
-    const closeModal = (event) => {
-        event.preventDefault();
-        dispatch(uiCloseModal());
-    };
+    const {activeEvent} = useSelector( state => state.book );
+    const { modalOpen } = useSelector(state => state.ui);    
     
     const [formValues, setFormValues] = useState(initEvent);
     const {id, name, author, price} = formValues;
+        
+    useEffect(() => {
+        if (activeEvent) {
+            setFormValues(activeEvent)
+        } else {
+            setFormValues(initEvent)
+        }
+    }, [activeEvent, setFormValues]);
+    
+    const closeModal = () => {
+        dispatch(uiCloseModal());
+        setFormValues(initEvent);
+    };
     
     const onHandleChange = ({target}) => {
         setFormValues({
@@ -44,26 +50,23 @@ export const BookStoreModal = () => {
             [target.name]: target.value,
         });
     };
-
+    
     const onHandleSubmitForm = (event) => { 
         event.preventDefault();
-        dispatch(bookStoreAddBook(formValues));
-        dispatch(uiCloseModal());
-        setFormValues(initEvent);
+        if(activeEvent) {
+            dispatch(eventUpdated(formValues));
+        } else {
+            dispatch(eventAddBook(formValues));
+        };
+        closeModal();
     };
     
     return (
-            <Modal open={modalOpen}>
+            <Modal 
+                open={modalOpen}
+                onClose={closeModal}    
+            >
                 <Box sx={style}>
-                    <Fab 
-                        aria-label="close" 
-                        color="Red"
-                        onClick={closeModal}    
-                        size="small" 
-                        sx={{position:"absolute", marginLeft:40, marginTop:-2}}
-                    >
-                        <CloseOutlinedIcon />
-                    </Fab>
                     <Grid container spacing={0.4}>
                         <Grid item xs={12}>
                             <TextField fullWidth 
