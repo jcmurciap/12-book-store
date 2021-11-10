@@ -9,4 +9,7 @@ export const types = {
     eventClearActiveEvent: '[bookStore] Clear active event',
     eventDelete: '[bookStore] Event delete',
     eventUpdated: '[bookStore] Event updated',
+
+    authStartLogin: '[auth] Start Login',
+    
 };
