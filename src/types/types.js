@@ -11,5 +11,5 @@ export const types = {
     eventUpdated: '[bookStore] Event updated',
 
     authStartLogin: '[auth] Start Login',
-    
+    authLogin: '[auth] Login',
 };
