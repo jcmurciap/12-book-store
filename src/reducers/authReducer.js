@@ -1,9 +1,21 @@
-import React from 'react'
+import { types } from "../types/types";
 
-export const authReducer = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+const initialState = {
+    checking: true,
+};
+
+export const authReducer = (state=initialState, action) => {
+
+    switch (action.type) {
+        
+        case types.authLogin:
+            return {
+                ...state,
+                checking: false,
+                ...action.payload // uid, name
+            };
+
+        default:
+            return state;
+    }
+};

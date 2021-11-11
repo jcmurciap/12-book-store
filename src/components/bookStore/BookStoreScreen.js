@@ -9,12 +9,14 @@ import { DataGrid } from '@mui/x-data-grid';
 import { uiOpenModal } from '../../actions/ui';
 import { BookStoreModal } from './BookStoreModal';
 import { NavBar } from '../ui/NavBar';
+import { eventClearActiveEvent, eventSetActive } from '../../actions/bookStore';
+import { DeleteEventFab } from '../ui/DeleteEventFab';
 
 const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'name', headerName: 'Name', width: 140 },
-    { field: 'author', headerName: 'Author', width: 130 },
-    { field: 'price', headerName: 'Price', width: 110 },
+    { field:'id', headerName:'ID', width:100 },
+    { field:'name', headerName:'Name', width:100 },
+    { field:'author', headerName:'Author', width:100 },
+    { field:'price', headerName:'Price', width:100 },
 ];
 
 export const ButtonBase = styled(Button)({
@@ -26,10 +28,27 @@ export const ButtonBase = styled(Button)({
 export const BookStoreScreen = () => { 
     
     const dispatch = useDispatch();
+    
     const onHandleOpenModal = () => {
+        // necesito que diferencie el evento nuevo al evento a modificar #BUG
         dispatch(uiOpenModal());
     };
-    const { events } = useSelector( state => state.book );
+    
+    const { events, activeEvent } = useSelector( state => state.book );
+        
+    const onHandleSelectActive = (event) => {
+        dispatch(eventSetActive(event));
+    };
+
+    // Oculta el boton de eliminar.
+    const onSelectSlot = () => {
+        dispatch(eventClearActiveEvent());
+    };    
+    
+    const onHandleStartUpdate = (event) => {
+        dispatch(uiOpenModal());
+        dispatch(eventSetActive(event));
+    };
     
     return (
         <>
@@ -49,10 +68,13 @@ export const BookStoreScreen = () => {
                     columns={columns}
                     hideFooterPagination
                     hideFooterSelectedRowCount
-                    onCellDoubleClick={onHandleOpenModal}
+                    onCellDoubleClick={onHandleStartUpdate}
+                    onRowClick={onHandleSelectActive}
                     rows={events}
+                    onCellClick={onSelectSlot}
                 />
             </Container>
+            {(activeEvent ) && <DeleteEventFab />}
             <BookStoreModal />
         </>
     );

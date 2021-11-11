@@ -12,8 +12,10 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import { ButtonBase } from '../bookStore/BookStoreScreen';
-//import Box from '@mui/material/Box';
-//import { StyledEngineProvider } from '@mui/material/styles';
+import { useForm } from '../../hooks/useForm';
+import { startLogin } from '../../actions/auth';
+import { useDispatch } from 'react-redux';
+
 
 export const Div = styled('div')(({ theme }) => ({
     [theme.breakpoints.up('sm')]: {
@@ -27,6 +29,20 @@ export const Div = styled('div')(({ theme }) => ({
 }));
 
 export const LoginScreen = () => {
+    
+    const dispatch = useDispatch();
+    const [ formLoginValues, handleLoginInputChange ] = useForm({
+        lEmail: "jose@gmail.com",
+        lPassword: "123456"
+    });
+       
+    const { lEmail, lPassword } = formLoginValues;
+    
+    const handleLogin = (event) => {
+        event.preventDefault();
+        dispatch(startLogin(lEmail, lPassword));
+    };    
+    
     return (
         <Container maxWidth="xl" sx={{ display: "flex", justifyContent: "center" }}>
             <Div>
@@ -43,14 +59,32 @@ export const LoginScreen = () => {
                 </Stack>
                 <Grid container rowSpacing={1}>
                     <Grid item xs={12}>
-                        <TextField fullWidth required id="outlined-required" label="Email"/>
+                        <TextField 
+                            fullWidth 
+                            id="outlined-required" 
+                            label="Email"
+                            name="lEmail"
+                            onChange={handleLoginInputChange}
+                            required 
+                            value={lEmail}
+                        />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField fullWidth required id="outlined-password-input" label="Password" type="password"/>
+                        <TextField 
+                            fullWidth 
+                            id="outlined-password-input" 
+                            label="Password" 
+                            name="lPassword"
+                            onChange={handleLoginInputChange}
+                            required 
+                            type="password"
+                            value={lPassword}
+                            
+                        />
                     </Grid>
                     <Grid item xs={12}><Button variant="text" sx={{ textTransform: "capitalize", color: "DarkGreen" }}>Forgot password?</Button></Grid>
                     <Grid item xs={12}>
-                        <Button fullWidth variant="contained" sx={{ backgroundColor: "DarkGreen" }}>
+                        <Button fullWidth variant="contained" onClick={handleLogin} sx={{ backgroundColor: "DarkGreen" }}>
                             Continue
                         </Button>
                     </Grid>
