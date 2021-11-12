@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/system';
 import Box from '@mui/material/Box';
@@ -9,14 +9,14 @@ import { DataGrid } from '@mui/x-data-grid';
 import { uiOpenModal } from '../../actions/ui';
 import { BookStoreModal } from './BookStoreModal';
 import { NavBar } from '../ui/NavBar';
-import { eventClearActiveEvent, eventSetActive } from '../../actions/bookStore';
+import { eventClearActiveEvent, eventSetActive, eventStartLoading } from '../../actions/bookStore';
 import { DeleteEventFab } from '../ui/DeleteEventFab';
 
 const columns = [
-    { field:'id', headerName:'ID', width:100 },
-    { field:'name', headerName:'Name', width:100 },
-    { field:'author', headerName:'Author', width:100 },
-    { field:'price', headerName:'Price', width:100 },
+    { field:'id', headerName:'ID', width:210 },
+    { field:'name', headerName:'Name', width:200 },
+    { field:'author', headerName:'Author', width:80 },
+    { field:'price', headerName:'Price', width:80 },
 ];
 
 export const ButtonBase = styled(Button)({
@@ -30,12 +30,11 @@ export const BookStoreScreen = () => {
     const dispatch = useDispatch();
     
     const onHandleOpenModal = () => {
-        // necesito que diferencie el evento nuevo al evento a modificar #BUG
         dispatch(uiOpenModal());
     };
     
     const { events, activeEvent } = useSelector( state => state.book );
-        
+    
     const onHandleSelectActive = (event) => {
         dispatch(eventSetActive(event));
     };
@@ -49,6 +48,10 @@ export const BookStoreScreen = () => {
         dispatch(uiOpenModal());
         dispatch(eventSetActive(event));
     };
+    
+    useEffect(() => {
+        dispatch(eventStartLoading())
+    }, [dispatch]);
     
     return (
         <>

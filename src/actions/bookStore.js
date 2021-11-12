@@ -29,6 +29,24 @@ export const eventAddBook = (event) => ({
     payload: event,
 });
 
+export const eventStartLoading = () => {
+    return async(dispatch) => {
+        try {
+            const resp = await fetchWithToken('events',{},'GET');
+            const body = await resp.json();
+            const events = body.event;
+            dispatch(eventLoaded(events))
+        } catch (error) {
+            console.log(error);
+        };
+    };
+};
+
+const eventLoaded = (event) =>({
+    type: types.eventLoaded,
+    payload: event
+})
+
 export const eventSetActive = (event) => ({
     type: types.eventSetActive,
     payload: event.row,
