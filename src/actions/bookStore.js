@@ -1,11 +1,13 @@
 import { fetchWithToken } from "../helpers/fetch";
 import { types } from "../types/types";
-import { uiCloseModal } from "./ui";
+import { logout } from "./auth";
 
-const eventStartAddBook = (event) => {
+export const eventStartAddBook = (event) => {
     
     return async(dispatch, getState) => {
         const { uid, name } = getState().auth; // last value returned by the store's reducer
+        console.log(uid);
+        console.log(name);
         try {
             const resp = await fetchWithToken('events', event, 'POST');
             const body = await resp.json();
@@ -96,6 +98,14 @@ export const eventStartDelete = () => {
     };
 };
 
-export const eventDelete = () => ({
-    type: types.eventDelete,
-});
+export const eventDelete = () => ({ type: types.eventDelete });
+
+export const startLogout = () => {
+    return (dispatch) => {
+        localStorage.clear();
+        dispatch(eventLogout());
+        dispatch(logout());
+    };
+};
+
+export const eventLogout = () => ({ type: types.eventLogout });

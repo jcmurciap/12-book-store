@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseModal } from '../../actions/ui';
-import { eventAddBook, eventStartUpdate } from '../../actions/bookStore';
+import { eventStartAddBook, eventStartUpdate } from '../../actions/bookStore';
 
 const style = {
     position: "absolute",
@@ -29,7 +29,7 @@ export const BookStoreModal = () => {
     const { modalOpen } = useSelector(state => state.ui);    
     
     const [formValues, setFormValues] = useState(initEvent);
-    const {id, name, author, price} = formValues;
+    const {name, author, price} = formValues;
         
     const closeModal = () => {
         dispatch(uiCloseModal());
@@ -47,7 +47,7 @@ export const BookStoreModal = () => {
         if(activeEvent) {
             dispatch(eventStartUpdate(formValues));
         } else {
-            dispatch(eventAddBook(formValues));
+            dispatch(eventStartAddBook(formValues));
         };
         closeModal();
     };
@@ -67,17 +67,6 @@ export const BookStoreModal = () => {
             >
                 <Box sx={style}>
                     <Grid container spacing={0.4}>
-                        <Grid item xs={12}>
-                            <TextField fullWidth 
-                                id="standard-basic" 
-                                label="Id" 
-                                name="id" 
-                                onChange={onHandleChange} 
-                                size="small"
-                                value={id}
-                                variant="standard" 
-                            />
-                        </Grid>
                         <Grid item xs={12}>
                             <TextField fullWidth 
                                 id="standard-basic" 

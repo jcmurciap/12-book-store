@@ -8,27 +8,27 @@ export const initState = {
 
 export const bookStoreReducer = (state=initState, action) => {
     switch (action.type) {
-        case (types.eventAddBook):
+        case types.eventAddBook:
             return {
                 ...state,
                 events: [...state.events, action.payload]
             };    
-        case (types.eventSetActive):
+        case types.eventSetActive:
             return {
                 ...state,
                 activeEvent: action.payload
             };
-        case (types.eventClearActiveEvent):
+        case types.eventClearActiveEvent:
             return {
                 ...state,
                 activeEvent: null,
             };
-        case(types.eventLoaded):
+        case types.eventLoaded:
             return {
                 ...state,
                 events: [...action.payload],
             };
-        case(types.eventDelete):
+        case types.eventDelete:
             return {
                 ...state,
                 //activeEvent: null,
@@ -36,12 +36,16 @@ export const bookStoreReducer = (state=initState, action) => {
                     e => (e.id !== state.activeEvent.id)
                 ),
             };
-        case (types.eventUpdated):
+        case types.eventUpdated:
             return {
                 ...state,
                 events: state.events.map(
                     e => (e.id === action.payload.id) ? action.payload : e
                 )
+            }
+        case types.eventLogout:
+            return {
+                ...initState,
             }
         default:
             return initState
