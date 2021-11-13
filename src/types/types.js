@@ -10,6 +10,7 @@ export const types = {
     eventDelete: '[bookStore] Event delete',
     eventUpdated: '[bookStore] Event updated',
 
-    authStartLogin: '[auth] Start Login',
     authLogin: '[auth] Login',
+    authRegister: '[auth] Register',
+    authCheckingFinish: '[auth] Event checking finish',
 };

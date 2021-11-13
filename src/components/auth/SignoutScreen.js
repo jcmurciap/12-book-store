@@ -11,8 +11,32 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import InputAdornment from '@mui/material/InputAdornment';
 import Divider from '@mui/material/Divider';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+import { useForm } from '../../hooks/useForm';
+import { useDispatch } from 'react-redux';
+import { startRegister } from '../../actions/auth';
 
 export const SignoutScreen = () => {
+    
+    const dispatch = useDispatch();
+
+    const [ formRegisterValues, handleRegisterInputChange ] = useForm({
+        rName: "Ofelia",
+        rEmail: "ofelia@gmail.com",
+        rPassword: "123456",
+        rPassword2: "123456",
+    });
+    const { rName,rEmail,rPassword,rPassword2 } = formRegisterValues;  
+    
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        
+        if( rPassword === rPassword2 ){
+            dispatch(startRegister(rName, rEmail,rPassword));
+        } else {
+            console.log('Password needs to be equal'); //TODO mejorar con un componente de feedback
+        };
+    };
+
     return (
         <Container maxWidth="xl" sx={{ display: "flex", justifyContent: "center" }}>
             <Div>
@@ -27,10 +51,26 @@ export const SignoutScreen = () => {
                 </Stack>
                 <Grid container rowSpacing={1}>
                     <Grid item xs={12}>
-                        <TextField fullWidth required id="outlined-required" label="Username"/>
+                        <TextField 
+                            fullWidth 
+                            required 
+                            id="outlined-required" 
+                            label="Username"
+                            name="rName"
+                            value={rName}
+                            onChange={handleRegisterInputChange}
+                        />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField fullWidth required id="outlined-required" label="Email"/>
+                        <TextField 
+                            fullWidth 
+                            required 
+                            id="outlined-required" 
+                            label="Email"
+                            name="rEmail"
+                            value={rEmail}
+                            onChange={handleRegisterInputChange}
+                        />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField fullWidth 
@@ -46,12 +86,38 @@ export const SignoutScreen = () => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField fullWidth required id="outlined-password-input" label="Password" type="password"/>
+                        <TextField 
+                        fullWidth 
+                        required 
+                        id="outlined-password-input" 
+                        label="Password" 
+                        type="password"
+                        name="rPassword"
+                        value={rPassword}
+                        onChange={handleRegisterInputChange}
+                    />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField fullWidth required id="outlined-password-input" label="Confirm Password" type="password"/>
+                        <TextField 
+                        fullWidth 
+                        required 
+                        id="outlined-password-input" 
+                        label="Confirm Password" 
+                        type="password"
+                        name="rPassword2"
+                        value={rPassword2}
+                        onChange={handleRegisterInputChange}
+                    />
                     </Grid>
-                    <Grid item xs={12} sx={{ marginTop: 1 }}><Button fullWidth variant="contained">Continue</Button></Grid>
+                    <Grid item xs={12} sx={{ marginTop: 1 }}>
+                        <Button
+                            fullWidth 
+                            onClick={handleSubmit}
+                            variant="contained" 
+                        >
+                            Continue
+                        </Button>
+                    </Grid>
                     <Grid item xs={12} sx={{ color: "green" }}><Divider/></Grid>
                 </Grid>
             </Div>

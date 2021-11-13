@@ -1,14 +1,15 @@
 import React from 'react'
 import Fab from '@mui/material/Fab';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import { eventStartDelete } from '../../actions/bookStore';
 import { useDispatch } from 'react-redux';
-import { eventDelete } from '../../actions/bookStore';
 
 export const DeleteEventFab = () => {
     
     const dispatch = useDispatch()
-    const onHandleDelete = () => {
-        dispatch(eventDelete());
+    
+    const onHandleDelete = (event) => {
+        dispatch(eventStartDelete());
     };    
     
     return (

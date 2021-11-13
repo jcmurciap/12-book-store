@@ -2,7 +2,7 @@
 import { types } from '../types/types'
 
 export const initState = {
-    events: [{id:1, name: "quijote", author:"camilo", price: 12}],
+    events: [],
     activeEvent: null,
 };
 
@@ -26,12 +26,12 @@ export const bookStoreReducer = (state=initState, action) => {
         case(types.eventLoaded):
             return {
                 ...state,
-                events: [action.payload],
+                events: [...action.payload],
             };
         case(types.eventDelete):
             return {
                 ...state,
-                activeEvent: null,
+                //activeEvent: null,
                 events: state.events.filter(
                     e => (e.id !== state.activeEvent.id)
                 ),
