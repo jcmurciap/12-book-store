@@ -10,16 +10,26 @@ import Stack from '@mui/material/Stack';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import ButtonGroup from '@mui/material/ButtonGroup';
+import { useDispatch } from 'react-redux';
+import { startLogout } from '../../actions/bookStore';
+
 
 export const NavBar = () => {
     
+    const dispatch = useDispatch();
+    
     const [anchorEl, setAnchorEl] = useState(null);
+    
     const openMenuMob = Boolean(anchorEl);
     const handleCloseMenuMob = () => {
         setAnchorEl(null);    
     };
     const handleClickMob = (event) => {
         setAnchorEl(event.currentTarget);
+    };
+    
+    const handleLogout = () => {
+        dispatch(startLogout());
     }; 
 
     const renderMenuMobile = (
@@ -31,7 +41,7 @@ export const NavBar = () => {
             open={openMenuMob}
         >
             
-            <MenuItem onClick={(event) => {event.view.window.location.href="http://localhost:3000/login"}}>
+            <MenuItem onClick={handleLogout}>
                 <IconButton>
                     <LogoutOutlinedIcon />
                 </IconButton>
@@ -60,6 +70,7 @@ export const NavBar = () => {
                             color="error"
                             startIcon={<LogoutOutlinedIcon />} 
                             sx={{backgroundColor: "white", textTransform: "capitalize"}}
+                            onClick={handleLogout}
                             variant="outlined" 
                         >
                             Logout

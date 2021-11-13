@@ -78,3 +78,7 @@ export const startChecking = () => {
 const checkingFinish = () => ({
     type: types.authCheckingFinish
 });
+
+export const logout = () => ({
+    type: types.authLogout,
+})

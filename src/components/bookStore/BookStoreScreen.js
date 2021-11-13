@@ -9,7 +9,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { uiOpenModal } from '../../actions/ui';
 import { BookStoreModal } from './BookStoreModal';
 import { NavBar } from '../ui/NavBar';
-import { eventClearActiveEvent, eventSetActive, eventStartLoading, eventStartUpdate } from '../../actions/bookStore';
+import { eventClearActiveEvent, eventSetActive, eventStartLoading } from '../../actions/bookStore';
 import { DeleteEventFab } from '../ui/DeleteEventFab';
 
 const columns = [
@@ -69,6 +69,7 @@ export const BookStoreScreen = () => {
                 <DataGrid
                     autoHeight
                     columns={columns}
+                    editMode="row"
                     hideFooterPagination
                     hideFooterSelectedRowCount
                     onCellDoubleClick={onHandleStartUpdate}
