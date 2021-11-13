@@ -1,5 +1,6 @@
 import { fetchWithToken } from "../helpers/fetch";
 import { types } from "../types/types";
+import { uiCloseModal } from "./ui";
 
 const eventStartAddBook = (event) => {
     
@@ -55,6 +56,22 @@ export const eventSetActive = (event) => ({
 export const eventClearActiveEvent = () => ({
     type: types.eventClearActiveEvent,
 });
+
+export const eventStartUpdate = (event) => {
+    return async(dispatch) => {
+        try {
+            const resp = await fetchWithToken(`events/${event.id}`,event,'PUT');
+            const body = await resp.json();
+            if (body.ok) {
+                dispatch(eventUpdated(event));
+            } else {
+                console.log(`Error, ${body.msg}`);
+            }
+        } catch (error) {
+            console.log(error);
+        };
+    };
+}; 
 
 export const eventUpdated = (event) => ({
     type: types.eventUpdated,

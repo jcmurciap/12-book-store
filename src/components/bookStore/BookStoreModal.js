@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseModal } from '../../actions/ui';
-import { eventAddBook, eventUpdated } from '../../actions/bookStore';
+import { eventAddBook, eventStartUpdate } from '../../actions/bookStore';
 
 const style = {
     position: "absolute",
@@ -31,14 +31,6 @@ export const BookStoreModal = () => {
     const [formValues, setFormValues] = useState(initEvent);
     const {id, name, author, price} = formValues;
         
-    useEffect(() => {
-        if (activeEvent) {
-            setFormValues(activeEvent)
-        } else {
-            setFormValues(initEvent)
-        }
-    }, [activeEvent, setFormValues]);
-    
     const closeModal = () => {
         dispatch(uiCloseModal());
         setFormValues(initEvent);
@@ -51,15 +43,22 @@ export const BookStoreModal = () => {
         });
     };
     
-    const onHandleSubmitForm = (event) => { 
-        event.preventDefault();
+    const onHandleSubmitForm = () => { 
         if(activeEvent) {
-            dispatch(eventUpdated(formValues));
+            dispatch(eventStartUpdate(formValues));
         } else {
             dispatch(eventAddBook(formValues));
         };
         closeModal();
     };
+    
+    useEffect(() => {
+        if (activeEvent) {
+            setFormValues(activeEvent)
+        } else {
+            setFormValues(initEvent)
+        }
+    }, [activeEvent, setFormValues]);
     
     return (
             <Modal 
