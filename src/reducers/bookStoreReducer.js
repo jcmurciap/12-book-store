@@ -31,7 +31,7 @@ export const bookStoreReducer = (state=initState, action) => {
         case(types.eventDelete):
             return {
                 ...state,
-                activeEvent: null,
+                //activeEvent: null,
                 events: state.events.filter(
                     e => (e.id !== state.activeEvent.id)
                 ),

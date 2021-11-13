@@ -78,6 +78,24 @@ export const eventUpdated = (event) => ({
     payload: event
 });
 
+export const eventStartDelete = () => { 
+
+    return async (dispatch, getState) => {
+        
+        const { id } = getState().book.activeEvent;
+        
+        try {
+            const resp = await fetchWithToken(`events/${id}`, {}, 'DELETE');
+            const body = resp.json();
+            if (body.ok) {
+                dispatch(eventDelete());
+            };
+        } catch (error) {
+            console.log(error);
+        };
+    };
+};
+
 export const eventDelete = () => ({
-    type: types.eventDelete
+    type: types.eventDelete,
 });
