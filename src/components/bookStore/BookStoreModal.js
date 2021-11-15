@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseModal } from '../../actions/ui';
-import { eventStartAddBook, eventStartUpdate } from '../../actions/bookStore';
+import { eventStartAddBook, eventStartLoading, eventStartUpdate } from '../../actions/bookStore';
 
 const style = {
     position: "absolute",
@@ -33,6 +33,7 @@ export const BookStoreModal = () => {
         
     const closeModal = () => {
         dispatch(uiCloseModal());
+        dispatch(eventStartLoading())
         setFormValues(initEvent);
     };
     

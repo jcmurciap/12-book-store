@@ -15,6 +15,7 @@ import { ButtonBase } from '../bookStore/BookStoreScreen';
 import { useForm } from '../../hooks/useForm';
 import { startLogin } from '../../actions/auth';
 import { useDispatch } from 'react-redux';
+import { SignoutScreen } from './SignoutScreen';
 
 
 export const Div = styled('div')(({ theme }) => ({
@@ -41,8 +42,9 @@ export const LoginScreen = () => {
     const handleLogin = (event) => {
         event.preventDefault();
         dispatch(startLogin(lEmail, lPassword));
-    };    
-      
+    };
+    
+    
     return (
         <Container maxWidth="xl" sx={{ display: "flex", justifyContent: "center" }}>
             <Div>
@@ -88,9 +90,13 @@ export const LoginScreen = () => {
                         </Button>
                     </Grid>
                 </Grid>
-                <Grid container rowSpacing={1} sx={{ marginTop: 2 }}>
+                {/* <Grid container rowSpacing={1} sx={{ marginTop: 2 }}>
                     <Grid item xs={12}>
-                        <ButtonBase fullWidth variant="outlined">
+                        <ButtonBase 
+                            fullWidth 
+                            variant="outlined"
+                            onClick={SignoutScreen}
+                        >
                             Create account
                         </ButtonBase>
                     </Grid>
@@ -101,7 +107,7 @@ export const LoginScreen = () => {
                             <IconButton><GitHubIcon /></IconButton>
                         </Stack>
                     </Grid>
-                </Grid>
+                </Grid> */}
             </Div>
         </Container>
     );

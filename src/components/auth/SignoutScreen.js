@@ -20,10 +20,10 @@ export const SignoutScreen = () => {
     const dispatch = useDispatch();
 
     const [ formRegisterValues, handleRegisterInputChange ] = useForm({
-        rName: "Ofelia",
-        rEmail: "ofelia@gmail.com",
-        rPassword: "123456",
-        rPassword2: "123456",
+        rName: "",
+        rEmail: "",
+        rPassword: "",
+        rPassword2: "",
     });
     const { rName,rEmail,rPassword,rPassword2 } = formRegisterValues;  
     

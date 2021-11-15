@@ -12,6 +12,7 @@ import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { useDispatch } from 'react-redux';
 import { startLogout } from '../../actions/bookStore';
+import { startChecking } from '../../actions/auth';
 
 
 export const NavBar = () => {
@@ -30,6 +31,7 @@ export const NavBar = () => {
     
     const handleLogout = () => {
         dispatch(startLogout());
+        dispatch(startChecking());
     }; 
 
     const renderMenuMobile = (
