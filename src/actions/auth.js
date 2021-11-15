@@ -45,7 +45,7 @@ export const startRegister = (name, email, password) => {
                 name: body.name,
             }));
         } else {
-            // TODO
+            console.log('error');
         }
     
     };

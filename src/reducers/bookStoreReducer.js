@@ -1,4 +1,3 @@
-
 import { types } from '../types/types'
 
 export const initState = {
@@ -42,11 +41,11 @@ export const bookStoreReducer = (state=initState, action) => {
                 events: state.events.map(
                     e => (e.id === action.payload.id) ? action.payload : e
                 )
-            }
+            };
         case types.eventLogout:
             return {
                 ...initState,
-            }
+            };
         default:
             return initState
     };

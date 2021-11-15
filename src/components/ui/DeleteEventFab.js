@@ -8,7 +8,7 @@ export const DeleteEventFab = () => {
     
     const dispatch = useDispatch()
     
-    const onHandleDelete = (event) => {
+    const onHandleDelete = () => {
         dispatch(eventStartDelete());
     };    
     

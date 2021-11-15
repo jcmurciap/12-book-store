@@ -6,8 +6,6 @@ export const eventStartAddBook = (event) => {
     
     return async(dispatch, getState) => {
         const { uid, name } = getState().auth; // last value returned by the store's reducer
-        console.log(uid);
-        console.log(name);
         try {
             const resp = await fetchWithToken('events', event, 'POST');
             const body = await resp.json();
@@ -18,8 +16,8 @@ export const eventStartAddBook = (event) => {
                     _id: uid,
                     name: name
                 }; 
-                console.log(event);
                 dispatch(eventAddBook(event));
+                dispatch(eventStartLoading())
             };
         } catch ( error ){ 
             console.log(error);
@@ -66,6 +64,7 @@ export const eventStartUpdate = (event) => {
             const body = await resp.json();
             if (body.ok) {
                 dispatch(eventUpdated(event));
+                dispatch(eventStartLoading())
             } else {
                 console.log(`Error, ${body.msg}`);
             }
@@ -88,9 +87,10 @@ export const eventStartDelete = () => {
         
         try {
             const resp = await fetchWithToken(`events/${id}`, {}, 'DELETE');
-            const body = resp.json();
+            const body = await resp.json();
             if (body.ok) {
                 dispatch(eventDelete());
+                dispatch(eventStartLoading());
             };
         } catch (error) {
             console.log(error);
